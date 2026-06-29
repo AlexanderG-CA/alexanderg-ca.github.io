@@ -1,0 +1,71 @@
+{
+  "personal": {
+    "name": "Alexander Gorie",
+    "title": "Webbutvecklare",
+    "tagline": "Jag bygger genomtänkta digitala upplevelser — från API till gränssnitt.",
+    "location": "Sverige",
+    "email": "alexander.gorie@example.com",
+    "github": "AlexanderG-CA",
+    "githubUrl": "https://github.com/AlexanderG-CA",
+    "linkedinUrl": "https://www.linkedin.com/in/alexander-gorie/",
+    "certificateUrl": "https://true.chasacademy.se/examensbevis-chas-academy-357789-4314/?ref=linkedin&lang=en&zone=true_01",
+    "avatar": "https://avatars.githubusercontent.com/u/181277804?v=4"
+  },
+  "about": {
+    "intro": "Hej! Jag heter Alexander och jag är en passionerad utvecklare med fokus på att skapa användarvänliga, responsiva webbapplikationer.",
+    "paragraphs": [
+      "Jag arbetar främst med C#, TypeScript och React — och trivs bäst när jag får koppla ihop backend-logik med genomtänkt frontend-design. Min kodbas speglar en bred palett: REST API:er, MVC-applikationer och moderna responsiva webbplatser.",
+      "Utöver skolprojekt och praktik söker jag ständigt efter nya utmaningar där jag kan växa som utvecklare och bidra med kvalitet och nyfikenhet."
+    ],
+    "highlights": [
+      { "label": "Fokus", "value": "Fullstack & webb" },
+      { "label": "Språk", "value": "C#, TS, React" },
+      { "label": "Tillgänglig", "value": "För uppdrag" }
+    ]
+  },
+  "skills": [
+    {
+      "category": "Backend",
+      "items": ["C#", ".NET", "REST API", "Entity Framework", "SQL"]
+    },
+    {
+      "category": "Frontend",
+      "items": ["React", "TypeScript", "JavaScript", "HTML5", "CSS3"]
+    },
+    {
+      "category": "Verktyg",
+      "items": ["Git", "GitHub", "Vite", "Visual Studio", "VS Code"]
+    }
+  ],
+  "experience": [
+    {
+      "title": "Praktik — API-utveckling",
+      "company": "TestApi",
+      "period": "2026",
+      "description": "Praktisk erfarenhet av att designa och implementera API-lösningar i C# med fokus på tydlig struktur och underhållbar kod.",
+      "tags": ["C#", "API", "Praktik"]
+    },
+    {
+      "title": "Webbutvecklare",
+      "company": "Eget & skolprojekt",
+      "period": "2023 — nu",
+      "description": "Utveckling av responsiva webbplatser och dynamiska gränssnitt — från första iteration av CV-portalen till fullständiga bokningssystem.",
+      "tags": ["React", "CSS", "Responsiv design"]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Webbutveckling",
+      "institution": "YH-utbildning",
+      "period": "2020 — 2023",
+      "description": "Fokus på moderna webbteknologier, UX-principer och fullstack-utveckling."
+    },
+    {
+      "degree": "Datavetenskap",
+      "institution": "Högskola",
+      "period": "2018 — 2020",
+      "description": "Grundläggande programmering, algoritmer och datastrukturer."
+    }
+  ],
+  "excludeRepos": ["backup", "testtest", "alexanderg-ca.github.io"]
+}
