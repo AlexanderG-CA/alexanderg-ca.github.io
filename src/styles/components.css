@@ -242,7 +242,9 @@
 
 .hero {
   --hero-scroll-space: 3.25rem;
-  min-height: 100dvh;
+  /* svh stays fixed when mobile browser chrome shows/hides; dvh resizes the page mid-scroll */
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   padding-top: var(--nav-height);
