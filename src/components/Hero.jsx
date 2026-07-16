@@ -22,11 +22,18 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    const update = () => setShowEther(!media.matches)
+    const reduceMq = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const mobileMq = window.matchMedia(
+      '(max-width: 768px), (hover: none) and (pointer: coarse)',
+    )
+    const update = () => setShowEther(!reduceMq.matches && !mobileMq.matches)
     update()
-    media.addEventListener('change', update)
-    return () => media.removeEventListener('change', update)
+    reduceMq.addEventListener('change', update)
+    mobileMq.addEventListener('change', update)
+    return () => {
+      reduceMq.removeEventListener('change', update)
+      mobileMq.removeEventListener('change', update)
+    }
   }, [])
 
   return (

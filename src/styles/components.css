@@ -339,6 +339,27 @@
   50% { opacity: 0.5; }
 }
 
+@media (max-width: 768px), (hover: none) and (pointer: coarse) {
+  .hero {
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 28%, rgba(138, 85, 24, 0.28), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 70% 70%, rgba(232, 168, 73, 0.08), transparent 55%),
+      var(--bg-deep);
+  }
+
+  .hero-liquid-bg {
+    display: none;
+  }
+
+  .hero-dot {
+    animation: none;
+    opacity: 1;
+    box-shadow:
+      0 0 10px rgba(74, 222, 128, 0.75),
+      0 0 22px rgba(74, 222, 128, 0.4);
+  }
+}
+
 .hero-title {
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 4.2vw, 2.85rem);
