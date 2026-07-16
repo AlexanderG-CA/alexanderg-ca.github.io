@@ -1,70 +1,83 @@
 {
   "personal": {
     "name": "Alexander Gorie",
-    "title": "Webbutvecklare",
-    "tagline": "Jag bygger genomtänkta digitala upplevelser — från API till gränssnitt.",
-    "location": "Sverige",
-    "email": "alexander.gorie@example.com",
+    "title": "Fullstackutvecklare .NET",
+    "status": "Nyexaminerad från Chas Academy · LIA hos Obinio AB",
+    "tagline": "Jag bygger genomtänkta digitala lösningar — från REST API och databas till tillgängliga gränssnitt i React.",
+    "location": "Stockholm, Sverige",
+    "email": "alexander_gorie@hotmail.com",
     "github": "AlexanderG-CA",
     "githubUrl": "https://github.com/AlexanderG-CA",
     "linkedinUrl": "https://www.linkedin.com/in/alexander-gorie/",
     "certificateUrl": "https://true.chasacademy.se/examensbevis-chas-academy-357789-4314/?ref=linkedin&lang=en&zone=true_01",
-    "avatar": "https://avatars.githubusercontent.com/u/181277804?v=4"
+    "avatar": "/profile.png"
   },
   "about": {
-    "intro": "Hej! Jag heter Alexander och jag är en passionerad utvecklare med fokus på att skapa användarvänliga, responsiva webbapplikationer.",
+    "headline": "Fullstack .NET med nyfikenhet och struktur",
+    "intro": "Hej! Jag heter Alexander och är fullstackutvecklare med inriktning mot .NET, med examen från Chas Academy och praktisk erfarenhet från LIA hos Obinio AB.",
     "paragraphs": [
-      "Jag arbetar främst med C#, TypeScript och React — och trivs bäst när jag får koppla ihop backend-logik med genomtänkt frontend-design. Min kodbas speglar en bred palett: REST API:er, MVC-applikationer och moderna responsiva webbplatser.",
-      "Utöver skolprojekt och praktik söker jag ständigt efter nya utmaningar där jag kan växa som utvecklare och bidra med kvalitet och nyfikenhet."
+      "Under utbildningen har jag arbetat brett över stacken — backend i C# och .NET med Entity Framework och SQL, frontend i React, JavaScript och Tailwind, samt UX med fokus på tillgänglighet enligt WCAG. Jag trivs i agila team med dagliga standups, sprintar och tydligt samarbete.",
+      "Min bakgrund som småföretagare har gett mig styrkor i analytiskt tänkande, strukturerad problemlösning och tydlig kommunikation. Jag ser utveckling som ett område där man ständigt lär sig — teknologier, verktyg och arbetssätt förändras i hög takt, och det är där jag känner mig hemma."
     ],
     "highlights": [
-      { "label": "Fokus", "value": "Fullstack & webb" },
-      { "label": "Språk", "value": "C#, TS, React" },
-      { "label": "Tillgänglig", "value": "För uppdrag" }
+      { "label": "Fokus", "value": "Fullstack .NET" },
+      { "label": "Utbildning", "value": "Chas Academy" },
+      { "label": "Plats", "value": "Stockholm" }
     ]
   },
   "skills": [
     {
       "category": "Backend",
-      "items": ["C#", ".NET", "REST API", "Entity Framework", "SQL"]
+      "items": ["C#", ".NET", "Entity Framework", "SQL", "REST API", "Minimal API"]
     },
     {
       "category": "Frontend",
-      "items": ["React", "TypeScript", "JavaScript", "HTML5", "CSS3"]
+      "items": ["React", "JavaScript", "TypeScript", "HTML5", "CSS3", "Tailwind"]
     },
     {
-      "category": "Verktyg",
-      "items": ["Git", "GitHub", "Vite", "Visual Studio", "VS Code"]
+      "category": "UX & arbetsmetod",
+      "items": ["WCAG", "Tillgänglighet", "Scrum", "Kanban", "Agilt arbetssätt"]
+    },
+    {
+      "category": "Verktyg & plattform",
+      "items": ["Git", "GitHub", "Azure", "CI/CD", "Visual Studio", "VS Code"]
     }
   ],
   "experience": [
     {
-      "title": "Praktik — API-utveckling",
-      "company": "TestApi",
-      "period": "2026",
-      "description": "Praktisk erfarenhet av att designa och implementera API-lösningar i C# med fokus på tydlig struktur och underhållbar kod.",
-      "tags": ["C#", "API", "Praktik"]
+      "title": "LIA — Fullstack .NET-utvecklare",
+      "company": "Obinio AB",
+      "period": "dec 2025 — apr 2026",
+      "description": "20 veckors praktik som fullstack .NET-student. Utveckling i verkliga projekt med fokus på backend, API:er, databaser och frontend — i nära samarbete med teamet i agila arbetsflöden.",
+      "tags": ["C#", ".NET", "React", "LIA", "Agilt"]
     },
     {
-      "title": "Webbutvecklare",
-      "company": "Eget & skolprojekt",
-      "period": "2023 — nu",
-      "description": "Utveckling av responsiva webbplatser och dynamiska gränssnitt — från första iteration av CV-portalen till fullständiga bokningssystem.",
-      "tags": ["React", "CSS", "Responsiv design"]
+      "title": "Medarbetare",
+      "company": "NeedsAble",
+      "period": "jun 2020 — okt 2021",
+      "description": "Erfarenhet av operativt arbete och kundnära leverans i en växande verksamhet — med ansvar, struktur och tydlig kommunikation i vardagen.",
+      "tags": ["Operativt", "Kommunikation", "Teamarbete"]
+    },
+    {
+      "title": "UF-projekt — Ung företagsamhet",
+      "company": "HealthMix.UF",
+      "period": "sep 2018 — sep 2019",
+      "description": "Entreprenöriellt gymnasieprojekt i Stockholm. Tidig erfarenhet av att ta idé till produkt, presentera värde och arbeta målmedvetet i team.",
+      "tags": ["Entreprenörskap", "UF", "Stockholm"]
     }
   ],
   "education": [
     {
-      "degree": "Webbutveckling",
-      "institution": "YH-utbildning",
-      "period": "2020 — 2023",
-      "description": "Fokus på moderna webbteknologier, UX-principer och fullstack-utveckling."
+      "degree": ".NET Fullstackutveckling",
+      "institution": "Chas Academy",
+      "period": "2019 — 2024",
+      "description": "YH-utbildning med fokus på fullstack-utveckling i .NET — backend, frontend, databaser, API:er, agila metoder och tillgänglig design."
     },
     {
-      "degree": "Datavetenskap",
-      "institution": "Högskola",
-      "period": "2018 — 2020",
-      "description": "Grundläggande programmering, algoritmer och datastrukturer."
+      "degree": "Företagsekonomi",
+      "institution": "Huddinge Gymnasium",
+      "period": "2017 — 2019",
+      "description": "Gymnasieutbildning med fokus på ekonomi och företagande — grunden till mitt analytiska arbetssätt och intresse för struktur."
     }
   ],
   "excludeRepos": ["backup", "testtest", "alexanderg-ca.github.io"]

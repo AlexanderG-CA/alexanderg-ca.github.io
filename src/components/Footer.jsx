@@ -7,7 +7,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer-inner">
         <div className="footer-brand">
-          <span className="footer-logo">AG</span>
+          <span className="logo-mark footer-logo" aria-hidden="true">AG</span>
           <p>
             Designad & byggd av {cvData.personal.name}
           </p>
@@ -18,14 +18,20 @@ export default function Footer() {
             href={cvData.personal.githubUrl}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub"
           >
             GitHub
           </a>
-          <a href={`mailto:${cvData.personal.email}`} aria-label="E-post">
+          <a
+            href={cvData.personal.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          <a href={`mailto:${cvData.personal.email}`}>
             E-post
           </a>
-          <button onClick={() => window.print()} className="footer-print">
+          <button type="button" onClick={() => window.print()} className="footer-print">
             Skriv ut CV
           </button>
         </div>

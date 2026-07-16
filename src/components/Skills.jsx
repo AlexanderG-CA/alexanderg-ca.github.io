@@ -1,46 +1,48 @@
-import { useReveal } from '../hooks/useReveal'
 import cvData from '../data/cv-data.json'
+import SectionHeading from './react-bits/SectionHeading'
+import AnimatedContent from './react-bits/AnimatedContent'
+import ScrollStack, { ScrollStackItem } from './react-bits/ScrollStack'
+
+const skillGroups = cvData.skills.filter((group) => group.category !== 'Språk')
 
 export default function Skills() {
-  const ref = useReveal()
-
   return (
     <section id="kompetens" className="section skills">
       <div className="container">
-        <div ref={ref} className="reveal">
-          <span className="section-label">Kompetens</span>
-          <h2 className="section-title">Tekniker jag arbetar med</h2>
-          <p className="section-intro">
-            En blandning av backend och frontend — med verktyg jag använder dagligen i projekt och utbildning.
-          </p>
-        </div>
-
-        <div className="skills-grid">
-          {cvData.skills.map((group, i) => (
-            <SkillCard key={group.category} group={group} delay={i} />
-          ))}
-        </div>
+        <AnimatedContent>
+          <SectionHeading
+            label="Kompetens"
+            title="Tekniker jag arbetar med"
+            intro="Kompetenser från Chas Academy, LIA och projekt — backend, frontend, tillgänglighet och agilt arbetssätt."
+          />
+        </AnimatedContent>
       </div>
-    </section>
-  )
-}
 
-function SkillCard({ group, delay }) {
-  const ref = useReveal()
-
-  return (
-    <div
-      ref={ref}
-      className={`skill-card reveal reveal-delay-${delay + 1}`}
-    >
-      <h3 className="skill-card-title">{group.category}</h3>
-      <ul className="skill-list">
-        {group.items.map((item) => (
-          <li key={item}>
-            <span className="tag">{item}</span>
-          </li>
+      <ScrollStack
+        className="skills-scroll-stack skills-scroll-stack--fullscreen"
+        useWindowScroll
+        itemDistance={0}
+        itemStackDistance={14}
+        baseScale={0.98}
+        itemScale={0.006}
+        blurAmount={0}
+        stackPosition="15%"
+      >
+        {skillGroups.map((group) => (
+          <ScrollStackItem key={group.category} itemClassName="skill-stack-card">
+            <div className="skill-stack-card__inner container">
+              <h3 className="skill-card-title">{group.category}</h3>
+              <ul className="skill-list">
+                {group.items.map((item) => (
+                  <li key={item}>
+                    <span className="tag">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </ScrollStackItem>
         ))}
-      </ul>
-    </div>
+      </ScrollStack>
+    </section>
   )
 }

@@ -5,6 +5,7 @@ import cvData from '../data/cv-data.json'
 
 const MOBILE_QUERY = '(max-width: 1024px)'
 const MORPH_MS = 1000
+const MENU_ANIM_MS = 480
 
 const LAYOUT_SPRING = {
   type: 'spring',
@@ -26,14 +27,15 @@ function getIsMobile() {
   return window.matchMedia(MOBILE_QUERY).matches
 }
 
-function NavItems({ active, onNavigate, onGithubClick }) {
+function NavItems({ active, onNavigate, onGithubClick, layoutEnabled = true }) {
   return (
     <>
       <ul>
         {LINKS.map(({ id, label }, index) => (
           <motion.li
             key={id}
-            layoutId={`nav-link-${id}`}
+            layout={layoutEnabled}
+            layoutId={layoutEnabled ? `nav-link-${id}` : undefined}
             className="navbar-nav-item"
             style={{ '--nav-i': index }}
             transition={LAYOUT_SPRING}
@@ -49,7 +51,8 @@ function NavItems({ active, onNavigate, onGithubClick }) {
         ))}
       </ul>
       <motion.a
-        layoutId="nav-link-github"
+        layout={layoutEnabled}
+        layoutId={layoutEnabled ? 'nav-link-github' : undefined}
         href={cvData.personal.githubUrl}
         target="_blank"
         rel="noopener noreferrer"
@@ -68,6 +71,7 @@ export default function Navbar() {
   const active = useScrollSpy()
   const [isMobile, setIsMobile] = useState(getIsMobile)
   const [isMorphing, setIsMorphing] = useState(false)
+  const [morphToMobile, setMorphToMobile] = useState(getIsMobile)
   const [open, setOpen] = useState(false)
   const [closing, setClosing] = useState(false)
   const [entered, setEntered] = useState(false)
@@ -88,6 +92,7 @@ export default function Navbar() {
     (toMobile) => {
       if (morphTimerRef.current) clearTimeout(morphTimerRef.current)
       resetMenu()
+      setMorphToMobile(toMobile)
       setIsMorphing(true)
       setIsMobile(toMobile)
       morphTimerRef.current = window.setTimeout(() => {
@@ -117,7 +122,7 @@ export default function Navbar() {
     closeTimerRef.current = window.setTimeout(() => {
       setClosing(false)
       closeTimerRef.current = null
-    }, 420)
+    }, MENU_ANIM_MS)
   }
 
   const toggleMenu = () => {
@@ -153,7 +158,17 @@ export default function Navbar() {
     return () => cancelAnimationFrame(id)
   }, [open, isMobile, isMorphing])
 
+  useEffect(() => {
+    if (!open || !isMobile) return undefined
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') closeMenu()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [open, isMobile])
+
   const mobileMenuVisible = isMobile && (open || closing)
+  const layoutEnabled = !isMorphing || !morphToMobile
   const navClass = [
     'navbar-nav',
     isMobile && entered ? 'open' : '',
@@ -173,7 +188,7 @@ export default function Navbar() {
           onClick={scrollToTop}
           aria-label="Tillbaka till startsidan"
         >
-          <span className="navbar-logo-mark">AG</span>
+          <span className="logo-mark navbar-logo-mark">AG</span>
           <span className="navbar-logo-text">{cvData.personal.name.split(' ')[0]}</span>
         </button>
 
@@ -205,7 +220,7 @@ export default function Navbar() {
                 key="desktop-nav"
                 className="navbar-nav navbar-nav--desktop"
                 aria-label="Huvudnavigering"
-                layout
+                layout={layoutEnabled}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -215,6 +230,7 @@ export default function Navbar() {
                   active={active}
                   onNavigate={scrollTo}
                   onGithubClick={() => {}}
+                  layoutEnabled={layoutEnabled}
                 />
               </motion.nav>
             ) : (
@@ -223,17 +239,15 @@ export default function Navbar() {
                 id="mobile-nav"
                 className={navClass}
                 aria-label="Huvudnavigering"
-                aria-hidden={!mobileMenuVisible && !isMorphing}
-                layout
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.28 }}
+                aria-hidden={!mobileMenuVisible}
+                layout={layoutEnabled}
+                transition={LAYOUT_SPRING}
               >
                 <NavItems
                   active={active}
                   onNavigate={scrollTo}
                   onGithubClick={closeMenu}
+                  layoutEnabled={layoutEnabled}
                 />
               </motion.nav>
             )}

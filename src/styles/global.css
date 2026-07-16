@@ -36,13 +36,15 @@
   --gap-fluid-lg: clamp(2rem, 5vw, 4rem);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --transition: 0.3s var(--ease-out);
+  --transition: 0.25s var(--ease-out);
   --layout-transition:
     gap 0.45s var(--ease-out),
     padding 0.45s var(--ease-out),
     margin 0.45s var(--ease-out),
     font-size 0.45s var(--ease-out),
     max-width 0.45s var(--ease-out);
+
+  --focus-ring: 0 0 0 2px var(--bg-deep), 0 0 0 4px var(--accent);
 }
 
 *,
@@ -73,9 +75,9 @@ body::before {
   position: fixed;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232, 168, 73, 0.08), transparent),
-    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(100, 80, 200, 0.05), transparent),
-    radial-gradient(ellipse 50% 30% at 0% 80%, rgba(232, 168, 73, 0.04), transparent);
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(232, 168, 73, 0.09), transparent),
+    radial-gradient(ellipse 55% 35% at 100% 40%, rgba(232, 168, 73, 0.035), transparent),
+    radial-gradient(ellipse 50% 30% at 0% 80%, rgba(232, 168, 73, 0.045), transparent);
   pointer-events: none;
   z-index: 0;
 }
@@ -100,6 +102,28 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+summary:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.85rem;
+  background: var(--accent);
+  color: var(--bg-deep);
+  border-radius: var(--radius-sm);
 }
 
 ul {
@@ -158,9 +182,12 @@ ul {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3rem);
   font-weight: 700;
-  line-height: 1.15;
+  line-height: 1.2;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  max-width: 100%;
 }
 
 .section-intro {
@@ -252,6 +279,12 @@ ul {
     transform: none;
   }
 
+  .about-card:hover,
+  .timeline-card:hover,
+  .project-card-wrap.card-spotlight:hover {
+    transform: none;
+  }
+
   .navbar-backdrop,
   .navbar-nav,
   .navbar-nav::before,
@@ -294,6 +327,7 @@ ul {
   .hero-scroll,
   .contact-form,
   .footer-social,
+  .side-links,
   .skip-link {
     display: none !important;
   }
