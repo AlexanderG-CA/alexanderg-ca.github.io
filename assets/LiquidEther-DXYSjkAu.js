@@ -1,4 +1,4 @@
-import{r as on,j as _l}from"./index-BMaNIVhX.js";/**
+import{r as on,j as _l}from"./index-BInyJY7T.js";/**
  * @license
  * Copyright 2010-2026 Three.js Authors
  * SPDX-License-Identifier: MIT
