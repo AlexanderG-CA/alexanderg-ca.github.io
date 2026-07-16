@@ -76,7 +76,7 @@ export default function SideLinks() {
             <ShinyText
               text={link.title}
               speed={2.2}
-              disabled={shinyDisabled}
+              disabled={shinyDisabled || !isIdle}
               className="side-link-shiny"
             />
           </span>
