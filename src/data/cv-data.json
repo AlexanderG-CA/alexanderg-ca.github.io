@@ -70,13 +70,25 @@
     {
       "degree": ".NET Fullstackutveckling",
       "institution": "Chas Academy",
-      "period": "2019 — 2024",
+      "period": "aug 2024 — apr 2026",
       "description": "YH-utbildning med fokus på fullstack-utveckling i .NET — backend, frontend, databaser, API:er, agila metoder och tillgänglig design."
+    },
+    {
+      "degree": "Webbutveckling",
+      "institution": "Karlstads universitet",
+      "period": "sep 2023 — maj 2024",
+      "description": "Universitetsstudier i webbutveckling med fokus på HTML, CSS och moderna webbtekniker."
+    },
+    {
+      "degree": "Consumer Economics",
+      "institution": "Karlstads universitet",
+      "period": "sep 2021 — maj 2023",
+      "description": "Universitetsstudier i consumer economics — analytiskt tänkande kring ekonomi, konsumtion och beslutsunderlag."
     },
     {
       "degree": "Företagsekonomi",
       "institution": "Huddinge Gymnasium",
-      "period": "2017 — 2019",
+      "period": "aug 2017 — aug 2019",
       "description": "Gymnasieutbildning med fokus på ekonomi och företagande — grunden till mitt analytiska arbetssätt och intresse för struktur."
     }
   ],

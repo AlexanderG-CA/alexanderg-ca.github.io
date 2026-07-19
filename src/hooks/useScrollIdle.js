@@ -23,7 +23,6 @@ export function useScrollIdle(idleMs = 1000) {
     }
 
     const onScroll = () => {
-      // Hide immediately — never run exit motion during an active scroll
       setIdle(false)
       scheduleIdle()
     }

@@ -1427,15 +1427,13 @@ a.contact-link {
   padding: 0.65rem;
   align-items: flex-end;
   transform: translate(120%, -50%);
-  /* Snap closed on scroll — exit animations fight the compositor while scrolling */
-  transition: none;
+  transition: transform 0.55s cubic-bezier(0.22, 1.15, 0.36, 1);
   pointer-events: none;
 }
 
 .side-links--visible {
   transform: translate(0, -50%);
   pointer-events: auto;
-  transition: transform 0.55s cubic-bezier(0.22, 1.15, 0.36, 1);
 }
 
 .side-link {
@@ -1448,16 +1446,17 @@ a.contact-link {
   overflow: visible;
   opacity: 0;
   transform: translateX(1.5rem);
-  transition: none;
+  transition:
+    opacity 0.4s var(--ease-out),
+    transform 0.5s cubic-bezier(0.22, 1.15, 0.36, 1),
+    color 0.25s ease;
+  /* Reverse stagger on exit so slide-out mirrors slide-in */
+  transition-delay: calc((2 - var(--side-i)) * 0.08s);
 }
 
 .side-links--visible .side-link {
   opacity: 1;
   transform: translateX(0);
-  transition:
-    opacity 0.4s var(--ease-out),
-    transform 0.5s cubic-bezier(0.22, 1.15, 0.36, 1),
-    color 0.25s ease;
   transition-delay: calc(0.06s + var(--side-i) * 0.08s);
 }
 
@@ -1520,16 +1519,17 @@ a.contact-link {
     0 0 18px var(--accent-glow),
     0 0 36px rgba(232, 168, 73, 0.18);
   opacity: 0;
-  transition: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  /* Labels tuck away first on exit */
+  transition-delay: 0s;
   pointer-events: none;
 }
 
 .side-links--visible .side-link-text {
   opacity: 1;
   transform: translateX(0);
-  transition:
-    opacity 0.35s ease,
-    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   /* reveal AFTER icon boxes have popped in */
   transition-delay: calc(0.55s + var(--side-i) * 0.08s);
 }
@@ -1571,7 +1571,6 @@ a.contact-link {
   .side-link-iconBox {
     width: 2.5rem;
     height: 2.5rem;
-    /* Animated box-shadow while scrolling is a common phone jank source */
     animation: none;
   }
 
@@ -1581,7 +1580,8 @@ a.contact-link {
   }
 
   .side-link-text {
-    display: none;
+    font-size: 0.75rem;
+    bottom: 0.05rem;
   }
 }
 

@@ -12,6 +12,9 @@ const LANG_COLORS = {
   React: '#61dafb',
 }
 
+/** Same trigger line for every card — enters as it crosses ~lower third of the viewport */
+const PROJECT_VIEWPORT = { once: true, margin: '0px 0px -22% 0px', amount: 0.2 }
+
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('sv-SE', {
     year: 'numeric',
@@ -51,8 +54,8 @@ export default function Projects() {
 
         {!loading && !error && (
           <div className="projects-grid">
-            {repos.map((repo, i) => (
-              <ProjectCard key={repo.id} repo={repo} delay={i % 4} />
+            {repos.map((repo) => (
+              <ProjectCard key={repo.id} repo={repo} />
             ))}
           </div>
         )}
@@ -61,11 +64,16 @@ export default function Projects() {
   )
 }
 
-function ProjectCard({ repo, delay }) {
+function ProjectCard({ repo }) {
   const langColor = LANG_COLORS[repo.language] || 'var(--accent)'
 
   return (
-    <AnimatedContent className="project-card-anim" delay={0.08 * delay} distance={40}>
+    <AnimatedContent
+      className="project-card-anim"
+      delay={0}
+      distance={36}
+      viewport={PROJECT_VIEWPORT}
+    >
       <SpotlightCard className="project-card-wrap">
         <a
           href={repo.html_url}
