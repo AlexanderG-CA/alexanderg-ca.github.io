@@ -97,7 +97,7 @@ export default function Hero() {
             <div className="hero-content">
               <p className="hero-greeting">
                 <span className="hero-dot" aria-hidden="true" />
-                {t.personal.status}
+                <span className="hero-greeting-text">{t.personal.status}</span>
               </p>
 
               <h1 className="hero-title">

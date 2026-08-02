@@ -197,7 +197,7 @@ export const translations = {
     },
     personal: {
       title: 'Fullstack .NET Developer',
-      status: 'Recent graduate from Chas Academy · Internship at Obinio AB',
+      status: 'Chas Academy graduate · Internship at Obinio AB',
       tagline:
         'I build thoughtful digital solutions — from REST APIs and databases to accessible React interfaces.',
       location: 'Stockholm, Sweden',
