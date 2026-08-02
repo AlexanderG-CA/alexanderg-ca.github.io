@@ -1,25 +1,28 @@
-import cvData from '../data/cv-data.json'
+import { useLanguage } from '../i18n/LanguageContext'
 import SectionHeading from './react-bits/SectionHeading'
 import SpotlightCard from './react-bits/SpotlightCard'
 import AnimatedContent from './react-bits/AnimatedContent'
 
 export default function About() {
+  const { t } = useLanguage()
+  const about = t.about
+
   return (
     <section id="om" className="section about">
       <div className="container">
         <div className="about-grid">
           <AnimatedContent className="about-header">
-            <SectionHeading label="Om mig" title={cvData.about.headline} />
+            <SectionHeading label={about.label} title={about.headline} />
           </AnimatedContent>
 
           <AnimatedContent className="about-body" delay={0.1}>
-            <p className="about-lead">{cvData.about.intro}</p>
-            {cvData.about.paragraphs.map((p, i) => (
-              <p key={i} className="about-text">{p}</p>
+            <p className="about-lead">{about.intro}</p>
+            {about.paragraphs.map((p) => (
+              <p key={p.slice(0, 24)} className="about-text">{p}</p>
             ))}
 
             <div className="about-cards">
-              {cvData.about.highlights.map((h, i) => (
+              {about.highlights.map((h, i) => (
                 <AnimatedContent key={h.label} delay={0.08 * i} distance={32}>
                   <SpotlightCard className="about-card">
                     <span className="about-card-label">{h.label}</span>

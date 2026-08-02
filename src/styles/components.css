@@ -254,6 +254,84 @@
   background: var(--bg-deep);
 }
 
+.hero-lang-switcher {
+  position: absolute;
+  top: calc(var(--nav-height) + 0.75rem);
+  right: clamp(0.85rem, 3vw, 1.75rem);
+  z-index: 5;
+}
+
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem;
+  border-radius: var(--radius-md);
+  background: rgba(19, 19, 28, 0.88);
+  border: 1px solid rgba(232, 168, 73, 0.35);
+  box-shadow:
+    0 0 18px rgba(232, 168, 73, 0.12),
+    0 8px 24px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid transparent;
+  border-radius: calc(var(--radius-md) - 2px);
+  background: transparent;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.lang-btn svg {
+  flex-shrink: 0;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.lang-btn:hover {
+  color: var(--text-primary);
+  background: rgba(232, 168, 73, 0.08);
+}
+
+.lang-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.lang-btn--active {
+  color: var(--accent-light);
+  background: rgba(232, 168, 73, 0.14);
+  border-color: rgba(232, 168, 73, 0.45);
+  box-shadow: 0 0 14px rgba(232, 168, 73, 0.18);
+}
+
+@media (max-width: 480px) {
+  .hero-lang-switcher {
+    top: calc(var(--nav-height) + 0.5rem);
+    right: 0.65rem;
+  }
+
+  .lang-btn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.72rem;
+  }
+}
+
 .hero-liquid-bg {
   position: absolute;
   inset: 0;
@@ -1611,9 +1689,31 @@ a.contact-link {
   text-decoration: none;
 }
 
+.hero-star-btn.btn,
+.hero-star-btn.star-border-container,
+.contact-star-btn.btn,
+.contact-star-btn.star-border-container {
+  border-radius: var(--radius-sm);
+}
+
+.hero-star-btn.btn {
+  padding-inline: clamp(1.5rem, 4vw, 2.25rem);
+}
+
+.contact-form .contact-star-btn,
+.contact-form .contact-star-btn.btn,
+.contact-form .contact-star-btn.star-border-container {
+  border-radius: var(--radius-sm);
+}
+
 .hero-star-btn .inner-content,
 .contact-star-btn .inner-content {
   width: 100%;
+  justify-content: center;
+  text-align: center;
+  border-radius: inherit;
+  box-sizing: border-box;
+  padding-inline: clamp(0.35rem, 1.5vw, 0.75rem);
 }
 
 .section-heading {

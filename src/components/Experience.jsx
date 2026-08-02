@@ -1,24 +1,27 @@
-import cvData from '../data/cv-data.json'
+import { useLanguage } from '../i18n/LanguageContext'
 import SectionHeading from './react-bits/SectionHeading'
 import SpotlightCard from './react-bits/SpotlightCard'
 import AnimatedContent from './react-bits/AnimatedContent'
 
 export default function Experience() {
+  const { t } = useLanguage()
+  const exp = t.experience
+
   return (
     <section id="erfarenhet" className="section experience">
       <div className="container">
         <AnimatedContent>
-          <SectionHeading label="Erfarenhet & utbildning" title="Min resa hittills" />
+          <SectionHeading label={exp.label} title={exp.title} />
         </AnimatedContent>
 
         <div className="timeline">
-          <h3 className="timeline-heading">Arbetslivserfarenhet</h3>
-          {cvData.experience.map((item, i) => (
+          <h3 className="timeline-heading">{exp.workHeading}</h3>
+          {exp.jobs.map((item, i) => (
             <TimelineItem key={`${item.title}-${item.company}`} item={item} delay={i} type="work" />
           ))}
 
-          <h3 className="timeline-heading timeline-heading--edu">Utbildning</h3>
-          {cvData.education.map((item, i) => (
+          <h3 className="timeline-heading timeline-heading--edu">{exp.eduHeading}</h3>
+          {exp.education.map((item, i) => (
             <TimelineItem key={item.degree} item={item} delay={i} type="edu" />
           ))}
         </div>
@@ -49,8 +52,8 @@ function TimelineItem({ item, delay, type }) {
           <p className="timeline-desc">{item.description}</p>
           {isWork && item.tags && (
             <div className="timeline-tags">
-              {item.tags.map((t) => (
-                <span key={t} className="tag">{t}</span>
+              {item.tags.map((tag) => (
+                <span key={tag} className="tag">{tag}</span>
               ))}
             </div>
           )}

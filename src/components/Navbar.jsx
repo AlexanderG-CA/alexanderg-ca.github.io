@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import { LayoutGroup, motion, AnimatePresence } from 'framer-motion'
 import { useScrollSpy } from '../hooks/useScrollSpy'
+import { useLanguage } from '../i18n/LanguageContext'
 import cvData from '../data/cv-data.json'
 
 const MOBILE_QUERY = '(max-width: 1024px)'
@@ -14,24 +15,17 @@ const LAYOUT_SPRING = {
   mass: 1.15,
 }
 
-const LINKS = [
-  { id: 'hem', label: 'Hem' },
-  { id: 'om', label: 'Om mig' },
-  { id: 'kompetens', label: 'Kompetens' },
-  { id: 'erfarenhet', label: 'Erfarenhet' },
-  { id: 'projekt', label: 'Projekt' },
-  { id: 'kontakt', label: 'Kontakt' },
-]
+const NAV_IDS = ['hem', 'om', 'kompetens', 'erfarenhet', 'projekt', 'kontakt']
 
 function getIsMobile() {
   return window.matchMedia(MOBILE_QUERY).matches
 }
 
-function NavItems({ active, onNavigate, onGithubClick, layoutEnabled = true }) {
+function NavItems({ links, active, onNavigate, onGithubClick, layoutEnabled = true }) {
   return (
     <>
       <ul>
-        {LINKS.map(({ id, label }, index) => (
+        {links.map(({ id, label }, index) => (
           <motion.li
             key={id}
             layout={layoutEnabled}
@@ -57,7 +51,7 @@ function NavItems({ active, onNavigate, onGithubClick, layoutEnabled = true }) {
         target="_blank"
         rel="noopener noreferrer"
         className="navbar-cta navbar-nav-item"
-        style={{ '--nav-i': LINKS.length }}
+        style={{ '--nav-i': links.length }}
         transition={LAYOUT_SPRING}
         onClick={onGithubClick}
       >
@@ -68,6 +62,7 @@ function NavItems({ active, onNavigate, onGithubClick, layoutEnabled = true }) {
 }
 
 export default function Navbar() {
+  const { t } = useLanguage()
   const active = useScrollSpy()
   const [isMobile, setIsMobile] = useState(getIsMobile)
   const [isMorphing, setIsMorphing] = useState(false)
@@ -77,6 +72,11 @@ export default function Navbar() {
   const [entered, setEntered] = useState(false)
   const closeTimerRef = useRef(null)
   const morphTimerRef = useRef(null)
+
+  const links = useMemo(
+    () => NAV_IDS.map((id) => ({ id, label: t.nav[id] })),
+    [t],
+  )
 
   const resetMenu = useCallback(() => {
     if (closeTimerRef.current) {
@@ -186,7 +186,7 @@ export default function Navbar() {
         <button
           className="navbar-logo"
           onClick={scrollToTop}
-          aria-label="Tillbaka till startsidan"
+          aria-label={t.nav.hem}
         >
           <span className="logo-mark navbar-logo-mark">AG</span>
           <span className="navbar-logo-text">{cvData.personal.name.split(' ')[0]}</span>
@@ -199,7 +199,7 @@ export default function Navbar() {
                 key="navbar-toggle"
                 className={`navbar-toggle ${open ? 'open' : ''}`}
                 onClick={toggleMenu}
-                aria-label={open ? 'Stäng meny' : 'Öppna meny'}
+                aria-label={open ? t.nav.menuClose : t.nav.menuOpen}
                 aria-expanded={open}
                 aria-controls="mobile-nav"
                 initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
@@ -219,7 +219,7 @@ export default function Navbar() {
               <motion.nav
                 key="desktop-nav"
                 className="navbar-nav navbar-nav--desktop"
-                aria-label="Huvudnavigering"
+                aria-label={t.nav.hem}
                 layout={layoutEnabled}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -227,6 +227,7 @@ export default function Navbar() {
                 transition={{ duration: 0.28 }}
               >
                 <NavItems
+                  links={links}
                   active={active}
                   onNavigate={scrollTo}
                   onGithubClick={() => {}}
@@ -238,12 +239,13 @@ export default function Navbar() {
                 key="mobile-nav"
                 id="mobile-nav"
                 className={navClass}
-                aria-label="Huvudnavigering"
+                aria-label={t.nav.hem}
                 aria-hidden={!mobileMenuVisible}
                 layout={layoutEnabled}
                 transition={LAYOUT_SPRING}
               >
                 <NavItems
+                  links={links}
                   active={active}
                   onNavigate={scrollTo}
                   onGithubClick={closeMenu}

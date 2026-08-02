@@ -1,4 +1,5 @@
 import { useGitHubRepos } from '../hooks/useGitHubRepos'
+import { useLanguage } from '../i18n/LanguageContext'
 import SectionHeading from './react-bits/SectionHeading'
 import SpotlightCard from './react-bits/SpotlightCard'
 import AnimatedContent from './react-bits/AnimatedContent'
@@ -12,42 +13,42 @@ const LANG_COLORS = {
   React: '#61dafb',
 }
 
-/** Same trigger line for every card — enters as it crosses ~lower third of the viewport */
 const PROJECT_VIEWPORT = { once: true, margin: '0px 0px -22% 0px', amount: 0.2 }
 
-function formatDate(dateStr) {
-  return new Date(dateStr).toLocaleDateString('sv-SE', {
-    year: 'numeric',
-    month: 'short',
-  })
-}
-
 export default function Projects() {
+  const { lang, t } = useLanguage()
   const { repos, loading, error } = useGitHubRepos()
+  const locale = lang === 'en' ? 'en-GB' : 'sv-SE'
+
+  const formatDate = (dateStr) =>
+    new Date(dateStr).toLocaleDateString(locale, {
+      year: 'numeric',
+      month: 'short',
+    })
 
   return (
     <section id="projekt" className="section projects">
       <div className="container">
         <AnimatedContent>
           <SectionHeading
-            label="Projekt"
-            title="Utvalda arbeten"
-            intro="Projekt hämtade direkt från GitHub — en levande portfolio som uppdateras i takt med att jag kodar."
+            label={t.projects.label}
+            title={t.projects.title}
+            intro={t.projects.intro}
           />
         </AnimatedContent>
 
         {loading && (
           <div className="projects-loading" role="status">
             <div className="spinner" aria-hidden="true" />
-            <span>Hämtar projekt...</span>
+            <span>{t.projects.loading}</span>
           </div>
         )}
 
         {error && (
           <p className="projects-error" role="alert">
-            {error}.{' '}
+            {t.projects.error}.{' '}
             <a href="https://github.com/AlexanderG-CA" target="_blank" rel="noopener noreferrer">
-              Besök GitHub istället →
+              {t.projects.visitGithub}
             </a>
           </p>
         )}
@@ -55,7 +56,13 @@ export default function Projects() {
         {!loading && !error && (
           <div className="projects-grid">
             {repos.map((repo) => (
-              <ProjectCard key={repo.id} repo={repo} />
+              <ProjectCard
+                key={repo.id}
+                repo={repo}
+                formatDate={formatDate}
+                noDescription={t.projects.noDescription}
+                updatedLabel={t.projects.updated}
+              />
             ))}
           </div>
         )}
@@ -64,7 +71,7 @@ export default function Projects() {
   )
 }
 
-function ProjectCard({ repo }) {
+function ProjectCard({ repo, formatDate, noDescription, updatedLabel }) {
   const langColor = LANG_COLORS[repo.language] || 'var(--accent)'
 
   return (
@@ -92,7 +99,7 @@ function ProjectCard({ repo }) {
 
           <h3 className="project-name">{repo.name}</h3>
           <p className="project-desc">
-            {repo.description || 'Ingen beskrivning tillgänglig.'}
+            {repo.description || noDescription}
           </p>
 
           <div className="project-footer">
@@ -102,7 +109,7 @@ function ProjectCard({ repo }) {
                 {repo.language}
               </span>
             )}
-            <span className="project-date">Uppdaterad {formatDate(repo.pushed_at)}</span>
+            <span className="project-date">{updatedLabel} {formatDate(repo.pushed_at)}</span>
           </div>
         </a>
       </SpotlightCard>

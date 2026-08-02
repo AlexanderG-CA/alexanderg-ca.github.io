@@ -1,6 +1,8 @@
 import cvData from '../data/cv-data.json'
+import { useLanguage } from '../i18n/LanguageContext'
 
 export default function Footer() {
+  const { t } = useLanguage()
   const year = new Date().getFullYear()
 
   return (
@@ -9,7 +11,7 @@ export default function Footer() {
         <div className="footer-brand">
           <span className="logo-mark footer-logo" aria-hidden="true">AG</span>
           <p>
-            Designad & byggd av {cvData.personal.name}
+            {t.footer.builtBy} {cvData.personal.name}
           </p>
         </div>
 
@@ -29,15 +31,15 @@ export default function Footer() {
             LinkedIn
           </a>
           <a href={`mailto:${cvData.personal.email}`}>
-            E-post
+            {t.footer.email}
           </a>
           <button type="button" onClick={() => window.print()} className="footer-print">
-            Skriv ut CV
+            {t.footer.print}
           </button>
         </div>
 
         <p className="footer-copy">
-          © {year} {cvData.personal.name}. Alla rättigheter förbehållna.
+          © {year} {cvData.personal.name}. {t.footer.rights}
         </p>
       </div>
     </footer>

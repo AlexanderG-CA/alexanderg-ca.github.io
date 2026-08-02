@@ -1,7 +1,7 @@
 .star-border-container {
   display: inline-block;
   position: relative;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   overflow: hidden;
 }
 
@@ -35,8 +35,10 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   z-index: 1;
+  text-align: center;
 }
 
 @keyframes star-movement-bottom {

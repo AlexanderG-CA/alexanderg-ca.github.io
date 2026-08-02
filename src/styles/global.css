@@ -206,9 +206,10 @@ ul {
   padding: clamp(0.75rem, 2vw, 0.875rem) clamp(1.25rem, 3vw, 1.75rem);
   font-weight: 600;
   font-size: clamp(0.88rem, 2vw, 0.95rem);
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   transition: var(--transition), var(--layout-transition);
   white-space: nowrap;
+  text-align: center;
 }
 
 .btn-primary {

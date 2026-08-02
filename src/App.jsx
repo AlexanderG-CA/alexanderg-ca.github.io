@@ -8,15 +8,17 @@ import Projects from './components/Projects'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { useEasterEggs } from './hooks/useEasterEggs'
+import { useLanguage } from './i18n/LanguageContext'
 import './styles/components.css'
 
 export default function App() {
   useEasterEggs()
+  const { t } = useLanguage()
 
   return (
     <>
       <a href="#hem" className="skip-link">
-        Hoppa till innehåll
+        {t.skipLink}
       </a>
       <Navbar />
       <SideLinks />

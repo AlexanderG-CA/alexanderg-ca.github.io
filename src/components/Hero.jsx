@@ -1,5 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from 'react'
 import cvData from '../data/cv-data.json'
+import { useLanguage } from '../i18n/LanguageContext'
+import LanguageSwitcher from './LanguageSwitcher'
 import BlurText from './react-bits/BlurText'
 import ShinyText from './react-bits/ShinyText'
 import StarBorder from './react-bits/StarBorder'
@@ -10,6 +12,7 @@ const LiquidEther = lazy(() => import('./react-bits/LiquidEther'))
 const HERO_ETHER_COLORS = ['#06060a', '#1a1408', '#8a5518', '#e8a849', '#f0c06a']
 
 export default function Hero() {
+  const { lang, t } = useLanguage()
   const [showEther, setShowEther] = useState(false)
 
   useEffect(() => {
@@ -64,6 +67,8 @@ export default function Hero() {
         </div>
       )}
 
+      <LanguageSwitcher className="hero-lang-switcher" />
+
       <div className="hero-body">
         <div className="container">
           <div className="hero-grid">
@@ -83,26 +88,27 @@ export default function Hero() {
               </div>
               <div className="hero-badge">
                 <span className="hero-badge-role">
-                  <ShinyText text={cvData.personal.title} speed={2.4} />
+                  <ShinyText key={`title-${lang}`} text={t.personal.title} speed={2.4} />
                 </span>
-                <span className="hero-badge-loc">{cvData.personal.location}</span>
+                <span className="hero-badge-loc">{t.personal.location}</span>
               </div>
             </div>
 
             <div className="hero-content">
               <p className="hero-greeting">
                 <span className="hero-dot" aria-hidden="true" />
-                {cvData.personal.status}
+                {t.personal.status}
               </p>
 
               <h1 className="hero-title">
-                <span className="hero-title-prefix">Hej, jag heter</span>{' '}
+                <span className="hero-title-prefix">{t.hero.hello}</span>{' '}
                 <span className="hero-name hero-name-glow">{cvData.personal.name}</span>
               </h1>
 
               <p className="hero-tagline">
                 <BlurText
-                  text={cvData.personal.tagline}
+                  key={`tagline-${lang}`}
+                  text={t.personal.tagline}
                   delay={22}
                   animateBy="words"
                   direction="bottom"
@@ -117,13 +123,13 @@ export default function Hero() {
                   color="var(--accent)"
                   speed="5s"
                 >
-                  Se mina projekt
+                  {t.hero.ctaProjects}
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </StarBorder>
                 <a href="#kontakt" className="btn btn-ghost">
-                  Kontakta mig
+                  {t.hero.ctaContact}
                 </a>
               </div>
             </div>
@@ -131,7 +137,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <a href="#om" className="hero-scroll" aria-label="Scrolla ner">
+      <a href="#om" className="hero-scroll" aria-label={t.hero.scrollDown}>
         <span />
       </a>
     </section>

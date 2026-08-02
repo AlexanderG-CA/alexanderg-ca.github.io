@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import cvData from '../data/cv-data.json'
+import { useLanguage } from '../i18n/LanguageContext'
 import SectionHeading from './react-bits/SectionHeading'
 import SpotlightCard from './react-bits/SpotlightCard'
 import AnimatedContent from './react-bits/AnimatedContent'
@@ -35,7 +36,9 @@ const CheckIcon = () => (
 )
 
 export default function Contact() {
-  const [status, setStatus] = useState('idle') // idle | submitting | success | error
+  const { t } = useLanguage()
+  const c = t.contact
+  const [status, setStatus] = useState('idle')
   const [errorMessage, setErrorMessage] = useState('')
 
   const handleSubmit = async (e) => {
@@ -53,7 +56,7 @@ export default function Contact() {
 
     if (!name || !email || !message) {
       setStatus('error')
-      setErrorMessage('Fyll i alla fält innan du skickar.')
+      setErrorMessage(c.fillAll)
       return
     }
 
@@ -73,7 +76,7 @@ export default function Contact() {
           email,
           message,
           replyto: email,
-          subject: `Portfolio-kontakt från ${name}`,
+          subject: `${c.subjectPrefix} ${name}`,
           from_name: 'Alexander Gorie Portfolio',
         }),
       })
@@ -81,7 +84,7 @@ export default function Contact() {
       const result = await response.json()
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Kunde inte skicka meddelandet.')
+        throw new Error(result.message || c.sendFailed)
       }
 
       form.reset()
@@ -89,9 +92,7 @@ export default function Contact() {
     } catch (err) {
       setStatus('error')
       setErrorMessage(
-        err instanceof Error
-          ? err.message
-          : 'Något gick fel. Försök igen eller mejla mig direkt.',
+        err instanceof Error ? err.message : c.genericError,
       )
     }
   }
@@ -102,9 +103,9 @@ export default function Contact() {
         <div className="contact-grid">
           <AnimatedContent className="contact-info">
             <SectionHeading
-              label="Kontakt"
-              title="Låt oss prata"
-              intro="Har du ett projekt, en praktikplats eller bara vill säga hej? Jag svarar gärna."
+              label={c.label}
+              title={c.title}
+              intro={c.intro}
             />
 
             <div className="contact-links">
@@ -113,7 +114,7 @@ export default function Contact() {
                   <MailIcon />
                 </span>
                 <span>
-                  <strong>E-post</strong>
+                  <strong>{c.email}</strong>
                   <span>{cvData.personal.email}</span>
                 </span>
               </a>
@@ -136,8 +137,8 @@ export default function Contact() {
                   <PinIcon />
                 </span>
                 <span>
-                  <strong>Plats</strong>
-                  <span>{cvData.personal.location}</span>
+                  <strong>{c.location}</strong>
+                  <span>{t.personal.location}</span>
                 </span>
               </div>
             </div>
@@ -151,9 +152,9 @@ export default function Contact() {
                     <span className="contact-success-icon" aria-hidden="true">
                       <CheckIcon />
                     </span>
-                    <h3>Tack för ditt meddelande!</h3>
+                    <h3>{c.successTitle}</h3>
                     <p>
-                      Jag har fått det och återkommer så snart jag kan. Du kan också nå mig via{' '}
+                      {c.successBody}{' '}
                       <a
                         href={cvData.personal.linkedinUrl}
                         target="_blank"
@@ -168,7 +169,7 @@ export default function Contact() {
                       className="btn btn-ghost contact-reset-btn"
                       onClick={() => setStatus('idle')}
                     >
-                      Skicka ett till
+                      {c.sendAnother}
                     </button>
                   </div>
                 ) : (
@@ -183,36 +184,36 @@ export default function Contact() {
                     />
 
                     <div className="form-row">
-                      <label htmlFor="name">Namn</label>
+                      <label htmlFor="name">{c.name}</label>
                       <input
                         id="name"
                         name="name"
                         type="text"
-                        placeholder="Ditt namn"
+                        placeholder={c.namePlaceholder}
                         required
                         autoComplete="name"
                         disabled={status === 'submitting'}
                       />
                     </div>
                     <div className="form-row">
-                      <label htmlFor="email">E-post</label>
+                      <label htmlFor="email">{c.email}</label>
                       <input
                         id="email"
                         name="email"
                         type="email"
-                        placeholder="din@email.se"
+                        placeholder={c.emailPlaceholder}
                         required
                         autoComplete="email"
                         disabled={status === 'submitting'}
                       />
                     </div>
                     <div className="form-row">
-                      <label htmlFor="message">Meddelande</label>
+                      <label htmlFor="message">{c.message}</label>
                       <textarea
                         id="message"
                         name="message"
                         rows={5}
-                        placeholder="Berätta om ditt projekt..."
+                        placeholder={c.messagePlaceholder}
                         required
                         disabled={status === 'submitting'}
                       />
@@ -221,7 +222,7 @@ export default function Contact() {
                     {status === 'error' && (
                       <p className="contact-error" role="alert">
                         {errorMessage}{' '}
-                        <a href={`mailto:${cvData.personal.email}`}>Mejla mig direkt →</a>
+                        <a href={`mailto:${cvData.personal.email}`}>{c.mailDirect}</a>
                       </p>
                     )}
 
@@ -234,7 +235,7 @@ export default function Contact() {
                       disabled={status === 'submitting'}
                       aria-busy={status === 'submitting'}
                     >
-                      {status === 'submitting' ? 'Skickar…' : 'Skicka meddelande'}
+                      {status === 'submitting' ? c.sending : c.send}
                     </StarBorder>
                   </>
                 )}
