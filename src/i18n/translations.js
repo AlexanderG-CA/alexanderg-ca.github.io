@@ -60,6 +60,10 @@ export const translations = {
         'UX & arbetsmetod': 'UX & arbetsmetod',
         'Verktyg & plattform': 'Verktyg & plattform',
       },
+      items: {
+        Tillgänglighet: 'Tillgänglighet',
+        'Agilt arbetssätt': 'Agilt arbetssätt',
+      },
     },
     experience: {
       label: 'Erfarenhet & utbildning',
@@ -233,6 +237,10 @@ export const translations = {
         Frontend: 'Frontend',
         'UX & arbetsmetod': 'UX & methods',
         'Verktyg & plattform': 'Tools & platform',
+      },
+      items: {
+        Tillgänglighet: 'Accessibility',
+        'Agilt arbetssätt': 'Agile Workflow',
       },
     },
     experience: {

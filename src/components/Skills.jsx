@@ -39,7 +39,7 @@ export default function Skills() {
               <ul className="skill-list">
                 {group.items.map((item) => (
                   <li key={item}>
-                    <span className="tag">{item}</span>
+                    <span className="tag">{t.skills.items?.[item] || item}</span>
                   </li>
                 ))}
               </ul>
